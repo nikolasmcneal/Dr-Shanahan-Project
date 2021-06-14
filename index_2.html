@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="stylesheet.css">
+  <script src="drag.js"></script>
+</head>
+
+<body>
+  <img id="a" src="jspsych/img/blue.png" class="dragme" data-state="play" />
+  <audio id="two" src="jspsych/audio/two.mp3" > Your browser does not support the <code>audio</code> tag </audio>
+
+  <img id="b" src="jspsych/img/orange.png" class="dragme" data-state="play" />
+  <audio id="five" src="jspsych/audio/five.mp3" >
+        Your browser does not support the <code>audio</code> tag
+    </audio>
+
+  <img id="c" src="jspsych/img/black.png" class="dragme" data-state="play" />
+  <audio id="one" src="jspsych/audio/one.mp3" >
+        Your browser does not support the <code>audio</code> tag
+    </audio>
+
+
+
+  <script language="javascript" type="text/javascript">
+    document.getElementById("a").addEventListener("click", function(e) {
+      var state = e.currentTarget.dataset.state;
+      if (state == "play") {
+        document.getElementById("two").play();
+        e.currentTarget.dataset.state = "pause";
+      } else {
+        document.getElementById("two").pause();
+        document.getElementById("two").currentTime=0;
+        // e.currentTarget.dataset.state = "play";
+        // document.getElementById("two").play();
+      }
+    });
+
+    document.getElementById("b").addEventListener("click", function(e) {
+      var state = e.currentTarget.dataset.state;
+      if (state == "play") {
+        document.getElementById("five").play();
+        e.currentTarget.dataset.state = "pause";
+      } else {
+        document.getElementById("five").pause();
+        document.getElementById("five").currentTime=0;
+    //     e.currentTarget.dataset.state = "play";
+    //     document.getElementById("five").play();
+      }
+    });
+
+    document.getElementById("c").addEventListener("click", function(e) {
+      var state = e.currentTarget.dataset.state;
+      if (state == "play") {
+        document.getElementById("one").play();
+        e.currentTarget.dataset.state = "pause";
+      } else {
+        document.getElementById("one").pause();
+        document.getElementById("one").currentTime=0;
+    //     e.currentTarget.dataset.state = "play";
+    //     document.getElementById("one").play();
+      }
+    });
+
+
+
+    var audioOne = document.querySelector('#two');
+    var audioTwo = document.querySelector('#five');
+    var audioThree = document.querySelector('#one');
+    var allAudios = document.querySelectorAll('audio');
+
+    function stopAllAudio(){
+        allAudios.forEach(function(audio){
+            audio.pause();
+	});}
+
+    document.querySelector('#a').addEventListener('click', function(){
+	    stopAllAudio();
+	    audioOne.play();
+        })
+    document.querySelector('#b').addEventListener('click', function(){
+	    stopAllAudio();
+	    audioTwo.play();
+        })
+
+    document.querySelector('#c').addEventListener('click', function(){
+	    stopAllAudio();
+	    audioThree.play();
+        })
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="stylesheet.css">
+    <script src= "drag.js"></script>
+  </head>
+
+    <img id="a" src="jspsych/img/blue.png" class="dragme" data-state="play"/>
+    <audio id = "two" src="jspsych/audio/five.mp3" preload>
+        Your browser does not support the <code>audio</code> tag
+    </audio>
+
+    <img id="b" src="jspsych/img/orange.png" class="dragme" data-state="play"/>
+    <audio id = "five" src="jspsych/audio/two.mp3" preload>
+        Your browser does not support the <code>audio</code> tag
+    </audio>
+
+    <img id="c" src="jspsych/img/black.png" class="dragme" data-state="play"/>
+    <audio id = "one" src="jspsych/audio/one.mp3" preload>
+        Your browser does not support the <code>audio</code> tag
+    </audio>
+
+<!-- 
+    <div id="div1" style="z-index: -1; position: fixed; left: 350px; bottom: 300px; width:250px;height:250px;border: 12px solid #000; background-color: lightgray;"></div>
+    <div id="div2" style="z-index: -1; position: fixed; left: 800px; bottom: 300px; width:250px;height:250px;border: 12px solid #000; background-color: lightgray;"></div>
+    <div id="div3" style="z-index: -1; position: fixed; left: 1250px; bottom: 300px; width:250px;height:250px;border: 12px solid #000; background-color: lightgray;"></div> -->
+
+    <script language="javascript" type="text/javascript">
+
+
+        document.getElementById("a").addEventListener("click", function(e){
+            var state = e.currentTarget.dataset.state;
+            if (state == "play") {
+                document.querySelector("audio").play();
+                e.currentTarget.dataset.state = "pause";
+            }
+            else {
+                document.querySelector("audio").pause();
+                e.currentTarget.dataset.state = "play";
+                document.querySelector("audio").play();
+            }	
+        });
+
+        document.getElementById("b").addEventListener("click", function(e){
+            var state = e.currentTarget.dataset.state;
+            if (state == "play") {
+                document.getElementById("five").play();
+                e.currentTarget.dataset.state = "pause";
+            }
+            else {
+                document.getElementById("five").pause();
+                e.currentTarget.dataset.state = "play";
+                document.querySelector("five").play();
+            }	
+        });
+
+        document.getElementById("c").addEventListener("click", function(e){
+            var state = e.currentTarget.dataset.state;
+            if (state == "play") {
+                document.getElementById("one").play();
+                e.currentTarget.dataset.state = "pause";
+            }
+            else {
+                document.getElementById("one").pause();
+                e.currentTarget.dataset.state = "play";
+                document.querySelector("one").play();
+            }	
+        });
+
+
+    </script>
+
+</html>
+

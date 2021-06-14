@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My experiment</title>
+    <script src="jspsych/jspsych.js"></script>
+    <script src="jspsych/plugins/jspsych-order.js"></script>
+    <link href="jspsych/css/jspsych.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="stylesheet.css">
+  </head>
+  <body></body>
+  <script>
+
+    /* create timeline */
+    var timeline = [];
+
+    timeline.push({
+        type: 'order',
+        stimulus: 'jspsych/img/blue.png',
+        choices: ['Continue'],
+    });
+
+
+
+    jsPsych.init({
+      timeline: timeline,
+      on_finish: function() {
+        jsPsych.data.displayData();
+      }
+    });
+  </script>
+</html>
