@@ -18,7 +18,13 @@
     name: 'order',
     description: '',
     parameters: {
-      stimulus: {
+      stimulus_img: {
+        type: jsPsych.plugins.parameterType.IMAGE,
+        pretty_name: 'Stimulus',
+        default: undefined,
+        description: 'The image to be displayed'
+      },
+      stimulus_audio: {
         type: jsPsych.plugins.parameterType.IMAGE,
         pretty_name: 'Stimulus',
         default: undefined,
@@ -156,8 +162,8 @@
 
 
     // display stimulus as an image element
-      html = '<img src="'+trial.stimulus+'" id="jspsych-order-stimulus" data-state="play" >';
-      html += '<audio id="two" src="jspsych/audio/five.mp3" preload> Your browser does not support the <code>audio</code> tag </audio>';
+      html = '<img src="'+trial.stimulus_img+'" id="jspsych-order-stimulus" data-state="play" >';
+      html += '<audio id="two" src="'+trial.stimulus_audio+'" preload> Your browser does not support the <code>audio</code> tag </audio>';
  
 
       
@@ -229,7 +235,7 @@
       // gather the data to store for the trial
       var trial_data = {
         rt: response.rt,
-        stimulus: trial.stimulus,
+        stimulus: trial.stimulus_img,
         response: response.button
       };
 
@@ -240,12 +246,6 @@
       jsPsych.finishTrial(trial_data);
     };
 
-    // hide image if timing is set
-    if (trial.stimulus_duration !== null) {
-      jsPsych.pluginAPI.setTimeout(function() {
-        display_element.querySelector('#jspsych-order-stimulus').style.visibility = 'hidden';
-      }, trial.stimulus_duration);
-    }
 
     // end trial if time limit is set
     if (trial.trial_duration !== null) {
