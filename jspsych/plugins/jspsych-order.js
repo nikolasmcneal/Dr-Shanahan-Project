@@ -108,6 +108,52 @@
     }
   }
 
+
+function startDrag(e) {
+
+    if (!e) {
+        var e = window.event;
+    }
+    if(e.preventDefault) e.preventDefault();
+
+
+    targ = e.target ? e.target : e.srcElement;
+
+    if (targ.className != 'dragme') {return};
+        offsetX = e.clientX;
+        offsetY = e.clientY;
+
+
+    if(!targ.style.left) { targ.style.left='0px'};
+    if (!targ.style.top) { targ.style.top='0px'};
+
+    coordX = parseInt(targ.style.left);
+    coordY = parseInt(targ.style.top);
+    drag = true;
+
+        document.onmousemove=dragDiv;
+    return false;
+    
+  }
+function dragDiv(e) {
+    if (!drag) {return};
+    if (!e) { var e= window.event};
+    targ.style.left=coordX+e.clientX-offsetX+'px';
+    targ.style.top=coordY+e.clientY-offsetY+'px';
+    return false;
+  }
+function stopDrag() {
+    drag=false;
+}
+window.onload = function() {
+    document.onmousedown = startDrag;
+    document.onmouseup = stopDrag;
+}
+
+
+
+
+
   plugin.trial = function(display_element, trial) {
 
     var height, width;
@@ -115,54 +161,12 @@
 
 
 
-    function startDrag(e) {
-
-        if (!e) {
-            var e = window.event;
-        }
-        if(e.preventDefault) e.preventDefault();
-    
-    
-        targ = e.target ? e.target : e.srcElement;
-    
-        if (targ.className != 'dragme') {return};
-            offsetX = e.clientX;
-            offsetY = e.clientY;
-    
-    
-        if(!targ.style.left) { targ.style.left='0px'};
-        if (!targ.style.top) { targ.style.top='0px'};
-    
-        coordX = parseInt(targ.style.left);
-        coordY = parseInt(targ.style.top);
-        drag = true;
-    
-            document.onmousemove=dragDiv;
-        return false;
-        
-      }
-    function dragDiv(e) {
-        if (!drag) {return};
-        if (!e) { var e= window.event};
-        targ.style.left=coordX+e.clientX-offsetX+'px';
-        targ.style.top=coordY+e.clientY-offsetY+'px';
-        return false;
-      }
-    function stopDrag() {
-        drag=false;
-    }
-    window.onload = function() {
-        document.onmousedown = startDrag;
-        document.onmouseup = stopDrag;
-    }
-
-
 
 
 
 
     // display stimulus as an image element
-      html = '<img src="'+trial.stimulus_img+'" id="jspsych-order-stimulus" data-state="play" >';
+      html = '<img src="'+trial.stimulus_img+'" id="jspsych-order-stimulus" class="dragme" data-state="play" >';
       html += '<audio id="two" src="'+trial.stimulus_audio+'" preload> Your browser does not support the <code>audio</code> tag </audio>';
  
 
@@ -179,12 +183,12 @@
 
     
 
-      document.getElementById('jspsych-order-stimulus').addEventListener("click", function(e) {
-        var state = e.currentTarget.dataset.state;
-        e.currentTarget.dataset.state = "play"
+      document.getElementById('jspsych-order-stimulus').addEventListener("click", function(d) {
+        var state = d.currentTarget.dataset.state;
+        d.currentTarget.dataset.state = "play"
         if (state == "play") {
           document.getElementById("two").play();
-          e.currentTarget.dataset.state = "pause";
+          d.currentTarget.dataset.state = "pause";
         } else {
           document.getElementById("two").pause();
           document.getElementById("two").currentTime=0;
@@ -192,6 +196,13 @@
           // document.getElementById("two").play();
         }
       });
+
+
+
+
+
+
+
 
 
 
